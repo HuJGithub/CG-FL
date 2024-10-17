@@ -24,8 +24,8 @@ class GA(ProcessedData):
             return
         if len(fail_feature)==1:
             fail_feature=np.vstack((fail_feature,fail_feature))
-        #temp_array = np.zeros([diff_num, len(self.feature_df.values[0])])
         for i in range(diff_num//2):
+            mask = np.random.randint(2, size=fail_feature.shape[1])
             temp1 = fail_feature[0]
             temp2 = fail_feature[1]
             for ft in fail_feature:
@@ -33,11 +33,14 @@ class GA(ProcessedData):
                     temp1,temp2 = temp2, temp1
                 if list(temp2).count(1) > list(ft).count(1):
                     temp2 = ft
-            j=np.random.randint(0, len(self.feature_df.values[0]))
-            temp1[j],temp2[j]=temp2[j],temp1[j]
-            fail_feature=np.vstack((fail_feature,temp1,temp2))
-
-
+            for i in range(len(mask)):
+                if mask[i]==1:
+                    ft1[i]=temp1[i]
+                    ft2[i]=temp2[i]
+                else:
+                    ft1[i]=temp2[i]
+                    ft2[i]=temp1[i]
+            fail_feature=np.vstack((fail_feature,ft1,ft2))
         compose_feature = np.vstack((pass_feature, fail_feature))
         #print(len(pass_feature),len(fail_feature))
         label_np = np.array(self.label_df)
