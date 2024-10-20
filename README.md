@@ -40,13 +40,14 @@ utils : some utils during pipeline
 run.py : program entry  
 ## Usage
 **required arguments: **
+| name  | meaning |value |
+| ------------- | ------------- | ------------- |
+| -d  | dataset  | "d4j", "manybugs","SIR"  |
+| -p  | program  | "Chart", "Closure", "Time", "Lang", ...   |
+| -i  | bug_id  | "1", "2", ...   |
+| -m  | method  | "dstar", "ochiai", "barinel", "MLP-FL", ...  |
+| -e  | experiment  | "origin", "slice", "slice_ga", ...  |
 
-name	meaning	value  
--d	dataset	"d4j", "manybugs","SIR"  
--p	program	"Chart", "Closure", "Time", "Lang", ...  
--i	bug_id	"1", "2", ...  
--m	method	"dstar", "ochiai", "barinel", "MLP-FL", ...  
--e	experiment	"origin", "slice", "slice_ga", ...  
 
 ## command for running
 run.py -d d4j -p Chart -i 1 -m GP02 -e slice_ga
